@@ -1,3 +1,5 @@
+drop table galleries, artists, artworks, customers;
+
 CREATE TABLE if not exists galleries (
 id serial PRIMARY KEY,
 name varchar(50) NOT NULL,
@@ -11,7 +13,7 @@ name varchar(100) NOT NULL,
 location text,
 phone text NOT NULL,
 gallery_id integer,
-foreign key (gallery_id) references galleries (id)
+foreign key (gallery_id) references galleries (id) on delete cascade
 );
 
 CREATE TABLE if not exists artworks(
@@ -26,9 +28,9 @@ medium text,
 created date,
 descriptions text,
 gallery_id integer,
-foreign key (gallery_id) references galleries (id),
+foreign key (gallery_id) references galleries (id), on delete cascade
 artist_id integer,
-foreign key (artist_id) references artists (id)
+foreign key (artist_id) references artists (id) on delete cascade
 );
 
 CREATE TABLE if not exists customers (
@@ -37,7 +39,7 @@ name varchar(100) NOT NULL,
 phone text NOT NULL,
 address varchar(150) NOT NULL,
 gallery_id integer,
-foreign key (gallery_id) references galleries (id)
+foreign key (gallery_id) references galleries (id) on delete cascade
 );
 
 
