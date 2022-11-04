@@ -1,0 +1,41 @@
+CREATE TABLE GALLERY(
+id serial PRIMARY KEY,
+name varchar(50) NOT NULL,
+location text,
+phone integer NOT NULL);
+
+
+CREATE TABLE ARTISTS (
+id serial PRIMARY KEY,
+name varchar(50) NOT NULL,
+phone integer NOT NULL,
+address text,
+FOREIGN KEY (GALLERY) REFERENCES ID(gallery_id) ON DELETE CASCADE);
+
+
+
+CREATE TABLE GALLERY(
+id serial PRIMARY KEY,
+name text NOT NULL,
+location text NOT NULL,
+phone integer NOT NULL);
+
+CREATE TABLE ART_ROOM(
+id integer PRIMARY KEY,
+name text NOT NULL,
+location text NOT NULL,
+phone integer NOT NULL);
+
+CREATE TABLE ARTWORKS(
+id integer PRIMARY KEY,
+title text,
+creator text,
+dimensions integer,
+color_pallet text,
+weight integer,
+price integer,
+medium text,
+year_created integer,
+description text,
+FOREIGN KEY (art_gallery_id) REFERENCES ART_GALLERY(art_gallery_id) ON DELETE CASCADE,
+FOREIGN KEY (artist_email_id) REFERENCES ARTISTS(artist_email_id) ON DELETE CASCADE);
