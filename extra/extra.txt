@@ -1,0 +1,8 @@
+# # notes
+
+# create user Josh_dev with encrypted password 'cheese';
+# grant all privileges on database art_gallery to Josh_dev;
+
+# create user client with encrypted password 'hello';
+
+# create user artist with encrypted password 'bye';

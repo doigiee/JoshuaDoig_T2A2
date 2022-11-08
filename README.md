@@ -1,4 +1,9 @@
-# READ ME
+# T2A2
+
+Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided).
+install requirements.txt while in your .venv environment
+create a user either admin (preferably) with priveleges on the database.
+
 
 ## R1 Identification of the problem you are trying to solve by building this particular app
 
