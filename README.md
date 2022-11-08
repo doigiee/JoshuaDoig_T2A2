@@ -39,6 +39,8 @@ MOreover, with other databases like NoSQL or MongoDB, which store their data as 
 
 ## R6 An ERD for your app
 
+![imgage](../JoshuaDoig_T2A2/docs/ERD%20image.jpg)
+
 find in docs folder titled 'ERD image.jpg'
 
 

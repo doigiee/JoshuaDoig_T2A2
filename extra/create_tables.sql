@@ -1,4 +1,4 @@
-drop table gallerys, artists, artworks, customers;
+drop table gallerys, artists, artworks, customers CASCADE;
 
 CREATE TABLE if not exists gallerys (
 id serial PRIMARY KEY,
