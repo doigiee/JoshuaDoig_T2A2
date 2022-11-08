@@ -7,11 +7,9 @@
 - pip install -r requirements.txt
 3. create a user either admin (preferably) with priveleges on the database.
 4. in psql when signed in create a database called art_gallery.
-5. now in your virtual environment run the commands ```flask db create``` then ```flask db seed```.
-Or if they don't work go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' (making sure to first set the datestyle ```SET datestyle = dmy;``` to insert the data into the tables.
+5. now go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' (making sure to first set the datestyle ```SET datestyle = dmy;``` to insert the data into the tables. An alternative would be to, while in your virtual environment, run the commands ```flask db create``` then ```flask db seed```.
+
 6.
-
-
 
 ## R1 Identification of the problem you are trying to solve by building this particular app
 
@@ -30,7 +28,7 @@ MOreover, with other databases like NoSQL or MongoDB, which store their data as 
 
 
 ## R4 Identify and discuss the key functionalities and benefits of an ORM
-
+create a devloper friednly workflow 
 
 
 ## R5 Document all endpoints for your API
@@ -39,7 +37,7 @@ MOreover, with other databases like NoSQL or MongoDB, which store their data as 
 
 ## R6 An ERD for your app
 
-![imgage](../JoshuaDoig_T2A2/docs/ERD%20image.jpg)
+![image](./docs/ERD%20image.jpg)
 
 find in docs folder titled 'ERD image.jpg'
 
