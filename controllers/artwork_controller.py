@@ -10,7 +10,7 @@ arts_bp = Blueprint('arts', __name__, url_prefix='/arts')
 @arts_bp.route('/')
 #@jwt_required()
 def get_all_arts():
-    stmt = db.select(Art).order_by(Art.title.desc())
+    stmt = db.select(Art)
     arts = db.session.scalars(stmt)
     return ArtSchema(many=True).dump(arts)
 

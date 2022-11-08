@@ -20,8 +20,8 @@ class Art(db.Model):
     gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=False)
     artist_id= db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
 
-    gallery = db.relationship("Gallery", back_populates="arts")
-    artist = db.relationship("Artist", back_populates="arts")
+    gallery = db.relationship("Gallery", backref="arts")
+    artist = db.relationship("Artist", backref="arts")
 
 
 class ArtSchema(ma.Schema):

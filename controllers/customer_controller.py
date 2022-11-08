@@ -21,7 +21,7 @@ def one_customer(id):
     customer = db.session.scalar(stmt)
     return CustomerSchema().dump(customer)
 
-    # return 'all_customers route'
+    # return 'all_customers route'w
 
     # if not authorize():
     # return {'error': 'You must be an admin'}, 401

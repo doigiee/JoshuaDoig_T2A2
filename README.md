@@ -1,8 +1,16 @@
 # T2A2
 
-Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided).
-install requirements.txt while in your .venv environment
-create a user either admin (preferably) with priveleges on the database.
+1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided).
+2. install requirements.txt while in your .venv environment
+- python -m venv .venv
+- source .venv/bin/activate
+- pip install -r requirements.txt
+3. create a user either admin (preferably) with priveleges on the database.
+4. in psql when signed in create a database called art_gallery.
+5. now in your virtual environment run the commands ```flask db create``` then ```flask db seed```.
+Or if they don't work go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' (making sure to first set the datestyle ```SET datestyle = dmy;``` to insert the data into the tables.
+6.
+
 
 
 ## R1 Identification of the problem you are trying to solve by building this particular app
@@ -15,7 +23,10 @@ It's a necessary problem that needs solving as im sure recording clients, artist
 
 
 ## R3 Why have you chosen this database system. What are the drawbacks compared to others?
-I have chosen PostgresQL as its a relational database which 
+I have chosen PostgresQL as its a relational database which makes it easier to catalogue and and organise the logic of my app. It becomes easier to debug and visual see the app broken into separate components rather than a single file containing all the information. It also allows myself and other developers a quick and easy way to find specific portions of code and zone in on those specific sections. MVC also allows for scalability in an industrial setting so it is good for me to learn this popular style of writing an API. MVC has various other benefits though these are the main benefits to be highlighted.
+
+Whens comparing MVC to other API models like NoSQL there are some drawbacks which can be addressed which include: it being a very strict data language, tables in our database must have sort of relations, we must follow a set of requirements of data inputs and same goes for Schemas, data entries cannot exceed column points/fields defined by the table. In addition, If I wanted to add a field to just one entry item in my table all tables are then required to have that field (empty or filled) in their rows.
+MOreover, with other databases like NoSQL or MongoDB, which store their data as documents, there is not fixed Schema. Lastly, PostgreSQL tends to perform slower than other databases, especially as the size of said database increases.
 
 
 ## R4 Identify and discuss the key functionalities and benefits of an ORM
@@ -28,10 +39,12 @@ I have chosen PostgresQL as its a relational database which
 
 ## R6 An ERD for your app
 
+find in docs folder titled 'ERD image.jpg'
 
 
 ## R7 Detail any third party services that your app will use
-pip review
+pip review was used
+Bcrypt was implemented
 
 
 ## R8 Describe your projects models in terms of the relationships they have with each other

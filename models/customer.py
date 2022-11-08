@@ -13,7 +13,7 @@ class Customer(db.Model):
     
     gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=False)
 
-    gallery = db.relationship("Gallery", back_populates="customers")
+    gallery = db.relationship("Gallery", backref="customers")
 
 
 class CustomerSchema(ma.Schema):

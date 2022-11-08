@@ -49,28 +49,28 @@ def seed_db():
     customers = [
         Customer(
             name = 'Disnay Price',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0436987456',
             address = '47 field Street, Brisbane',
             gallery = gallerys[1]
         ),
         Customer(
             name = 'Donna Monopoly',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0411224455',
             address = '81 Ashfrank Street, Brisbane',
             gallery = gallerys[2]
         ),
         Customer(
             name = 'Shooter McGavin',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0411445588',
             address = '13 Kings Drive, Brisbane',
             gallery = gallerys[1]
         ),
         Customer(
             name = 'Bails Onran',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0477441111',
             address = '14 Kings Drive, Brisbane',
             gallery = gallerys[2]
@@ -82,49 +82,49 @@ def seed_db():
     artists = [
         Artist(
             name = 'John Smithers',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '2 Coombayar Street, Adelaide',
             phone = '0411235558',
             gallery = gallerys[1]
         ),
         Artist(
             name = 'Sandra Bullocks',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '43 Epistien Road, Cambera',
             phone = '0421555668',
             gallery = gallerys[2]
         ),
         Artist(
             name = 'Jimmy Barnes',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '3 Laney Lane, Brisbane',
             phone = '0477889989',
             gallery = gallerys[1]
         ),
         Artist(
             name = 'Matthew Finley',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '56 Gumbear Street, Lizbane',
             phone = '0465656567',
             gallery = gallerys[3]
         ),
         Artist(
             name = 'Chris Hemsrunt',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '78 Crocodile Road, Brisbane',
             phone = '0412345679',
             gallery = gallerys[1]
         ),
         Artist(
             name = 'Sammy Tammy',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '91 Nikey Cresent, Sydney',
             phone = '0455555556',
             gallery = gallerys[3]
         ),
         Artist(
             name = 'Jacob Googels',
-            password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
+            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             address = '41 Crikey Lane, Adelaide',
             phone = '0432546581',
             gallery = gallerys[1]
