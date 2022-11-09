@@ -7,14 +7,14 @@ from flask_jwt_extended import create_access_token, get_jwt_identity
 
 artists_bp = Blueprint('artists', __name__, url_prefix='/artists')
 
-@artists_bp.route('/')
+@artists_bp.route('/', methods=["GET"])
 #@jwt_required()
 def get_all_artists():
-    stmt = db.select(Artist).order_by(Artist.id())
+    stmt = db.select(Artist)#.order_by(Artist.id())
     artists = db.session.scalars(stmt)
     return ArtistSchema(many=True).dump(artists)
 
-@artists_bp.route('/<int:id>/')
+@artists_bp.route('/<int:id>/', methods=["GET"])
 def one_artist(id):
     stmt = db.select(Artist).filter_by(id=id)
     artist = db.session.scalar(stmt)

@@ -13,7 +13,7 @@ class Artist(db.Model):
     
     gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=False)
 
-    gallery = db.relationship("Gallery", backref="artists")
+    # gallery = db.relationship("Gallery", backref="artists")
 
 class ArtistSchema(ma.Schema):
     class Meta:

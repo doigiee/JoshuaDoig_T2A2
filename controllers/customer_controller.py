@@ -7,7 +7,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity
 
 customers_bp = Blueprint('customers', __name__, url_prefix='/customers')
 
-@customers_bp.route('/')
+@customers_bp.route('/', methods=["GET"])
 #@jwt_required()
 def get_all_customers():
     # return 'get all'
@@ -15,7 +15,7 @@ def get_all_customers():
     customers = db.session.scalars(stmt)
     return CustomerSchema(many=True).dump(customers)
 
-@customers_bp.route('/<int:id>/')
+@customers_bp.route('/<int:id>/', methods=["GET"])
 def one_customer(id):
     stmt = db.select(Customer).filter_by(id=id)
     customer = db.session.scalar(stmt)

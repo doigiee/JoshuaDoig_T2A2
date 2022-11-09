@@ -4,7 +4,7 @@ from marshmallow.validate import Length, OneOf, And, Regexp
 from marshmallow.exceptions import ValidationError
 
 class Art(db.Model):
-    __tablename__ = 'arts'
+    __tablename__ = 'artworks'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text)
@@ -20,8 +20,8 @@ class Art(db.Model):
     gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=False)
     artist_id= db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
 
-    gallery = db.relationship("Gallery", backref="arts")
-    artist = db.relationship("Artist", backref="arts")
+    # gallery = db.relationship("Gallery", backref="arts")
+    # artist = db.relationship("Artist", backref="arts")
 
 
 class ArtSchema(ma.Schema):

@@ -15,9 +15,14 @@ class Gallery(db.Model):
 
     # art = db.relationship("Art", backref="gallerys")
 
+
+    # art = db.relationship("Gallery", backref="gallerys")
+    # artist = db.relationship("Artist", backref="gallerys")
+    # customer = db.relationship("Customer", backref="gallerys")
+
 class GallerySchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'location', 'phone', 'arts') 
+        fields = ('id', 'name', 'location', 'phone') 
         ordered = True
 
 

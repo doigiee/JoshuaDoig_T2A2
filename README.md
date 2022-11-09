@@ -1,19 +1,20 @@
 # T2A2
 
-1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided).
-2. install requirements.txt while in your .venv environment
-- python -m venv .venv
+1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided) and install requirements.txt while in your .venv environment
+- python3 -m venv .venv
 - source .venv/bin/activate
 - pip install -r requirements.txt
-3. create a user either admin (preferably) with priveleges on the database.
-4. in psql when signed in create a database called art_gallery.
-5. now go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' (making sure to first set the datestyle ```SET datestyle = dmy;``` to insert the data into the tables. An alternative would be to, while in your virtual environment, run the commands ```flask db create``` then ```flask db seed```.
-
-6.
+2. create a user either admin (preferably) with privileges on the database.
+3. now in psql, when signed in, create a database called ```art_gallery```.
+4. While in your virtual environment, run the commands ```flask db create``` then ```flask db seed```. 
+   An alternative would be to, now go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' to insert the data into the tables.
+5. now open postman using the route intended and send a GET request, while on your intended  URI channel, to  see 'gallerys', 'arts', 'artists' and 'customers' seeded database information.
 
 ## R1 Identification of the problem you are trying to solve by building this particular app
 
 With this app I'm trying to create a user-friendly experience for viewing and purchasing Artworks by taking a Art Gallery and representing it in the virtual world. The problem I'm solving is the difficulty art lovers face when having to look for a specific artworks. This API app shortens the amount of time it would normally take for a client to narrow down and find the type of work they want and gives them the exact updated listing ranges of the location, size, material, name. Users will be able to easily login as base users and be granted the ability to search for this a ever expanding list of artworks and pieces through queries. The end result will hopefully be a happy user finding the perfect piece for their collection.
+
+Through using this API app gives us a way, thoguh complex and advanced queries and aggregate functions, to find the specific and desired information such as: cheapest, most expensive, location filtering, total number of items in a table and so on.
 
 
 ## R2 Why is it a problem that needs solving?
@@ -28,11 +29,17 @@ MOreover, with other databases like NoSQL or MongoDB, which store their data as 
 
 
 ## R4 Identify and discuss the key functionalities and benefits of an ORM
-create a devloper friednly workflow 
+Creates a developer friendly workflow with less and cleaner code, great with connections, migrations, seeds, easier implementation of code. ORM's also gives us 'ready to go' CRUD functionalities, the ablilty to map classes to tables, session level caching, custom queries which are easy to execute and so on.
+
 
 
 ## R5 Document all endpoints for your API
 
+| | | |
+|----------|:-------------:|------:|
+|  |   |    |
+|  |   |    |
+|  |   |    |
 
 
 ## R6 An ERD for your app

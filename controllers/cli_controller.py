@@ -1,18 +1,18 @@
 from flask import Blueprint
 from init import db, bcrypt
+from datetime import date, datetime
 from models.art import Art
 from models.artist import Artist
 from models.customer import Customer
 from models.gallery import Gallery
 
-#if wanting to drop tables
+#if wanting to drop tables manually
 # drop table customers;
 # drop table artworks;
 # drop table artists;
 # drop table gallerys;
 
 db_commands = Blueprint('db', __name__)
-
 
 @db_commands.cli.command('create')
 def create_db():
@@ -25,6 +25,7 @@ def drop_db():
     print("Tables dropped")
 
 @db_commands.cli.command('seed')
+
 def seed_db():
     gallerys = [
         Gallery(
@@ -52,28 +53,28 @@ def seed_db():
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0436987456',
             address = '47 field Street, Brisbane',
-            gallery = gallerys[1]
+            gallery_id = 1
         ),
         Customer(
             name = 'Donna Monopoly',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0411224455',
             address = '81 Ashfrank Street, Brisbane',
-            gallery = gallerys[2]
+            gallery_id = 2
         ),
         Customer(
             name = 'Shooter McGavin',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0411445588',
             address = '13 Kings Drive, Brisbane',
-            gallery = gallerys[1]
+            gallery_id = 1
         ),
         Customer(
             name = 'Bails Onran',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0477441111',
             address = '14 Kings Drive, Brisbane',
-            gallery = gallerys[2]
+            gallery_id = 2
         )
     ]
     db.session.add_all(customers)
@@ -83,51 +84,51 @@ def seed_db():
         Artist(
             name = 'John Smithers',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '2 Coombayar Street, Adelaide',
+            location = '2 Coombayar Street, Adelaide',
             phone = '0411235558',
-            gallery = gallerys[1]
+            gallery_id = 1
         ),
         Artist(
             name = 'Sandra Bullocks',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '43 Epistien Road, Cambera',
+            location = '43 Epistien Road, Cambera',
             phone = '0421555668',
-            gallery = gallerys[2]
+            gallery_id = 2
         ),
         Artist(
             name = 'Jimmy Barnes',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '3 Laney Lane, Brisbane',
+            location = '3 Laney Lane, Brisbane',
             phone = '0477889989',
-            gallery = gallerys[1]
+            gallery_id = 1
         ),
         Artist(
             name = 'Matthew Finley',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '56 Gumbear Street, Lizbane',
+            location = '56 Gumbear Street, Lizbane',
             phone = '0465656567',
-            gallery = gallerys[3]
+            gallery_id = 3
         ),
         Artist(
             name = 'Chris Hemsrunt',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '78 Crocodile Road, Brisbane',
+            location = '78 Crocodile Road, Brisbane',
             phone = '0412345679',
-            gallery = gallerys[1]
+            gallery_id = 1
         ),
         Artist(
             name = 'Sammy Tammy',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '91 Nikey Cresent, Sydney',
+            location = '91 Nikey Cresent, Sydney',
             phone = '0455555556',
-            gallery = gallerys[3]
+            gallery_id = 3
         ),
         Artist(
             name = 'Jacob Googels',
             # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
-            address = '41 Crikey Lane, Adelaide',
+            location = '41 Crikey Lane, Adelaide',
             phone = '0432546581',
-            gallery = gallerys[1]
+            gallery_id = 1
         )
     ]
     db.session.add_all(artists)
@@ -142,10 +143,10 @@ def seed_db():
             kilograms = '10kg',
             price = '$150',
             medium = 'Oil on Canvas',
-            created = '15/07/1999',
-            description = 'A simple painting, done by a minor, which depicts a apple and a rock occupying an empty field',
-            gallery = gallerys[1],
-            artist = artists[1]
+            created = '19990715',
+            descriptions = 'A simple painting, done by a minor, which depicts a apple and a rock occupying an empty field',
+            gallery_id = 1,
+            artist_id = 1
         ),
         Art(
             title = 'Essence of Life',
@@ -155,10 +156,10 @@ def seed_db():
             kilograms = '20kg',
             price = '$4,555',
             medium = 'Oil on Canvas',
-            created = '16/7/1988',
-            description = 'A beautiful and lengthy piece which could adorn an open outdoor setting. The colors dance together to create a optical illusion',
-            gallery = gallerys[2],
-            artist = artists[2]
+            created = '19880716',
+            descriptions = 'A beautiful and lengthy piece which could adorn an open outdoor setting. The colors dance together to create a optical illusion',
+            gallery_id = 2,
+            artist_id = 2
         ),
         Art(
             title = 'Karma in Spite',
@@ -168,10 +169,10 @@ def seed_db():
             kilograms = '30kg',
             price = '$2,500',
             medium = 'stone and rock',
-            created = '15/06/1984',
-            description = 'Stones places and stuck together to create a giant natural stone display, great in a central area either indoors or outside',
-            gallery = gallerys[2],
-            artist = artists[2]
+            created = '19840615',
+            descriptions = 'Stones places and stuck together to create a giant natural stone display, great in a central area either indoors or outside',
+            gallery_id = 2,
+            artist_id = 2
         ),
         Art(
             title = 'Blue Skies',
@@ -181,10 +182,10 @@ def seed_db():
             kilograms = '25kg',
             price = '$1,250',
             medium = 'metal',
-            created = '24/06/2020',
-            description = 'a metal pipe for outdoors settings, paired with the natural blue sky to make an exhibit',
-            gallery = gallerys[3],
-            artist = artists[2]
+            created = '20200624',
+            descriptions = 'a metal pipe for outdoors settings, paired with the natural blue sky to make an exhibit',
+            gallery_id = 3,
+            artist_id = 2
         ),
         Art(
             title = 'Open Book',
@@ -194,10 +195,10 @@ def seed_db():
             kilograms = '10kg',
             price = '$500',
             medium = 'paper',
-            created = '23/01/1999',
-            description = 'Sandras personal collection of books becomes a masterpiece which draws viewers into the novels on display',
-            gallery = gallerys[1],
-            artist = artists[2]
+            created = '19990123',
+            descriptions = 'Sandras personal collection of books becomes a masterpiece which draws viewers into the novels on display',
+            gallery_id = 1,
+            artist_id = 2
         ),
         Art(
             title = 'Golden Guitar',
@@ -207,10 +208,10 @@ def seed_db():
             kilograms = '200kg',
             price = '$80,000',
             medium = 'gold',
-            created = '29/01/2012',
-            description = 'a pure gold guitar, our most valuable colection item',
-            gallery = gallerys[1],
-            artist = artists[3]
+            created = '20120129',
+            descriptions = 'a pure gold guitar, our most valuable colection item',
+            gallery_id = 1,
+            artist_id = 3
         ),
         Art(
             title = 'Heaven',
@@ -220,10 +221,10 @@ def seed_db():
             kilograms = '20kg',
             price = '$500',
             medium = 'wool',
-            created = '05/05/2001',
-            description = 'rug depicting a beautiful winter mountain surrounded by the cloudy skies',
-            gallery = gallerys[3],
-            artist = artists[3]
+            created = '20010505',
+            descriptions = 'rug depicting a beautiful winter mountain surrounded by the cloudy skies',
+            gallery_id = 3,
+            artist_id = 3
         ),
         Art(
             title = 'Ice Cream Machine',
@@ -233,10 +234,10 @@ def seed_db():
             kilograms = '40kg',
             price = '$500',
             medium = 'metal',
-            created = '06/07/2013',
-            description = 'an ice cream machine despensing political rhetoric',
-            gallery = gallerys[2],
-            artist = artists[3]
+            created = '20130706',
+            descriptions = 'an ice cream machine despensing political rhetoric',
+            gallery_id = 2,
+            artist_id = 3
         ),
         Art(
             title = 'Mountains',
@@ -246,10 +247,10 @@ def seed_db():
             kilograms = '6kg',
             price = '$450',
             medium = 'oil on canvas',
-            created = '20/08/2015',
-            description = 'mountains and wildlife pictured together',
-            gallery = gallerys[2],
-            artist = artists[4]
+            created = '20150820',
+            descriptions = 'mountains and wildlife pictured together',
+            gallery_id = 2,
+            artist_id = 4
         ),
         Art(
             title = 'Lost and Found',
@@ -259,10 +260,10 @@ def seed_db():
             kilograms = '1kg',
             price = '$250',
             medium = 'paper and light',
-            created = '25/06/2001',
-            description = 'paper cut out paired with light source to create imagery on a wall in correct environment',
-            gallery = gallerys[2],
-            artist = artists[4]
+            created = '20010625',
+            descriptions = 'paper cut out paired with light source to create imagery on a wall in correct environment',
+            gallery_id = 2,
+            artist_id = 4
         ),
         Art(
             title = 'Chapter of Me',
@@ -272,10 +273,10 @@ def seed_db():
             kilograms = '2kg',
             price = '$50',
             medium = 'paper',
-            created = '16/04/2019',
-            description = 'memoire of last words of famous figures of 1990 actors detailed on a single page',
-            gallery = gallerys[1],
-            artist = artists[5]
+            created = '20190416',
+            descriptions = 'memoire of last words of famous figures of 1990 actors detailed on a single page',
+            gallery_id = 1,
+            artist_id = 5
         ),
         Art(
             title = '1990',
@@ -285,10 +286,10 @@ def seed_db():
             kilograms = '4kg',
             price = '$49',
             medium = 'photograph',
-            created = '15/08/1995',
-            description = '1990 city cars, building, and stop lights take the main focus of this photo',
-            gallery = gallerys[3],
-            artist = artists[5]
+            created = '19950815',
+            descriptions = '1990 city cars, building, and stop lights take the main focus of this photo',
+            gallery_id = 3,
+            artist_id = 5
         ),
         Art(
             title = 'WHY?',
@@ -298,10 +299,10 @@ def seed_db():
             kilograms = '80kg',
             price = '$999',
             medium = 'marble',
-            created = '09/05/2003',
-            description = 'a figure begging in agony for release and tears in her eyes, beautiful marksmanship',
-            gallery = gallerys[1],
-            artist = artists[6]
+            created = '20030509',
+            descriptions = 'a figure begging in agony for release and tears in her eyes, beautiful marksmanship',
+            gallery_id = 1,
+            artist_id = 6
         ),
         Art(
             title = 'Donnatella',
@@ -311,10 +312,10 @@ def seed_db():
             kilograms = '80kg',
             price = '$40,000',
             medium = 'marble',
-            created = '18/07/2004',
-            description = 'marble figure posing confidently',
-            gallery = gallerys[1],
-            artist = artists[7]
+            created = '20040718',
+            descriptions = 'marble figure posing confidently',
+            gallery_id = 1,
+            artist_id = 7
         ),
     ]
     db.session.add_all(artworks)

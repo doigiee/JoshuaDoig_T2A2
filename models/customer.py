@@ -13,11 +13,11 @@ class Customer(db.Model):
     
     gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=False)
 
-    gallery = db.relationship("Gallery", backref="customers")
+    # gallery = db.relationship("Gallery", backref="customers")
 
 
 class CustomerSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'phone', 'address', 'gallery') 
+        fields = ('id', 'name', 'phone', 'address', 'gallerys') 
         ordered = True
 
