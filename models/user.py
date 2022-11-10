@@ -1,5 +1,10 @@
 from init import db, ma
 from marshmallow import fields
+from marshmallow import fields, validates
+from marshmallow.validate import Length, OneOf, And, Regexp
+from marshmallow.exceptions import ValidationError
+
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -19,4 +24,9 @@ class UserSchema(ma.Schema):
     # artists = fields.List(fields.Nested('ArtistSchema', exclude=['user']))
 
     class Meta:
+        model = User
         fields = ('id', 'name', 'email', 'password', 'is_admin') #, 'customers', 'artists')
+        password = ma.String(validate=Length(min=6))
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)

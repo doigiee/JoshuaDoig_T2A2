@@ -6,9 +6,10 @@
 - pip install -r requirements.txt
 2. create a user either admin (preferably) with privileges on the database.
 3. now in psql, when signed in, create a database called ```art_gallery```.
-4. While in your virtual environment, run the commands ```flask db create``` then ```flask db seed```. 
+4. While in your virtual environment, run the commands ```flask db create``` then ```flask db seed```. ```flask db drop``` if wanting to start over again.
    An alternative would be to, now go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' to insert the data into the tables.
 5. now open postman using the route intended and send a GET request, while on your intended  URI channel, to  see 'gallerys', 'arts', 'artists' and 'customers' seeded database information.
+6. Feel to experient using other cli. commands when in flask run mode.
 
 ## R1 Identification of the problem you are trying to solve by building this particular app
 

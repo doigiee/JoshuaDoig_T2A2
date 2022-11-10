@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, get_jwt_identity
 
 
+
 users_bp = Blueprint('users', __name__, url_prefix='/users')
 
 @users_bp.route('/', methods=["GET"])
@@ -15,7 +16,7 @@ def get_all_users():
     users = db.session.scalars(stmt)
     return UserSchema(many=True, exclude=['password']).dump(users)
 
-@user_bp.route('/register/', methods=['POST'])
+@users_bp.route('/register/', methods=['POST'])
 def user_register():
     try:
         # Create a new user model from user information
@@ -33,7 +34,7 @@ def user_register():
         return {'error': 'Sorry, please try again, that email is current unavailable or in use'}, 409
 
 
-@user_bp.route('/login/', methods=['POST'])
+@users_bp.route('/login/', methods=['POST'])
 def user_login():
     # user found by email
     stmt = db.select(User).filter_by(email=request.json['email'])

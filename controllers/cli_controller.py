@@ -5,6 +5,7 @@ from models.art import Art
 from models.artist import Artist
 from models.customer import Customer
 from models.gallery import Gallery
+from models.user import User
 
 #if wanting to drop tables manually
 # drop table customers;
@@ -316,9 +317,66 @@ def seed_db():
             descriptions = 'marble figure posing confidently',
             gallery_id = 1,
             artist_id = 7
-        ),
+        )
     ]
     db.session.add_all(artworks)
     db.session.commit()
 
-    print('Tables seeded')
+    users = [
+        User(
+            email = "admin@super.com",
+            name = "Bobby Brown",
+            password = bcrypt.generate_password_hash("password123").decode("utf-8"),
+            is_admin = True
+        ),
+        User(
+            email = "JohnSmithersss@super.com",
+            password = bcrypt.generate_password_hash("123456").decode("utf-8"),
+            name = "John Smithers"
+        ),
+        User(
+            email = "DisneyyPPrice28@super.com",
+            password = bcrypt.generate_password_hash("Mickey").decode("utf-8"),
+            name = "Disnay Price"
+        ),
+        User(
+            email = "user3@super.com",
+            password = bcrypt.generate_password_hash("778899").decode("utf-8"),
+            name = "Random Man"
+        )
+    ]
+    db.session.add_all(users)
+
+    # committing to users db
+    db.session.commit()
+    print("Table seeded")
+
+    # admin_user = User(
+    #     email = "admin@super.com",
+    #     password = "password123",
+    #     admin = True
+    # )
+    # db.session.add(admin_user)
+
+    # user1 = User(
+    #     email = "user1@super.com",
+    #     password = "123456"
+    # )
+    # db.session.add(user1)
+
+    # user2 = User(
+    #     email = "user2@super.com",
+    #     password = "654321"
+    # )
+    # db.session.add(user2)
+
+    # user3 = User(
+    # email = "user3@super.com",
+    # password = "778899"
+    # )
+    # db.session.add(user3)
+
+
+    # # committing to users db
+    # db.session.commit()
+    # print("Table seeded")
