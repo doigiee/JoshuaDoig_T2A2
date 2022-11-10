@@ -21,7 +21,7 @@ class Artist(db.Model):
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements
 class ArtistSchema(ma.Schema):
-    name = fields.String(required = False, validate= Regexp("^""([a-z])(?=.*"" [A-Z])?=.*(?=.*(?=.*\d)[])@$!%*?&[A-Za-z\d@$#$^()!%*?&]{8,}$", error='Please enter a valid title for your art.'))
+    name = fields.String(required = False, validate= Regexp("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", error='Please enter a valid title for your art.'))
     location = fields.String(required = False)
     phone = fields.String(required = True, validate=Length(min=9, error='phone number entries must be at least 9 numbers long'))
 #foreign key(s)

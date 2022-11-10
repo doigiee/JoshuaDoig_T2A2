@@ -21,8 +21,8 @@ class User(db.Model):
 # Marshmallow used for validation requirements
 class UserSchema(ma.Schema):
     name = fields.String(required = False)
-    email = fields.String(required = True, validate = Regexp("^""([a-z])(?=.*"" [A-Z])?=.*(?=.*(?=.*\d)[])@$!%*?&[A-Za-z\d@$#$^()!%*?&]{8,}$", error="Only vaild emails will be accepted, please try again."))
-    password = fields.String(required = True, validate= Regexp("^""([a-z])(?=.*"" [A-Z])?=.*(?=.*(?=.*\d)[])@$!%*?&[A-Za-z\d@$#$^()!%*?&]{8,}$", error='Try another password, special characters are permitted.'))
+    email = fields.String(required = True, validate = Regexp("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", error="Only vaild emails will be accepted, please try again."))
+    password = fields.String(required = True, validate= Regexp("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", error='Try another password, special characters are permitted.'))
     is_admin = fields.String(required = True)
 
     class Meta:
