@@ -3,14 +3,14 @@ from init import db, bcrypt
 from datetime import timedelta
 from models.user import User, UserSchema
 from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt_identity, JWTManager, create_access_token, jwt_required
 
 
 
 users_bp = Blueprint('users', __name__, url_prefix='/users')
 
 @users_bp.route('/', methods=["GET"])
-# @jwt_required()
+@jwt_required()
 def get_all_users():
     stmt = db.select(User)#.order_by(User.id())
     users = db.session.scalars(stmt)

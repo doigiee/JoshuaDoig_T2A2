@@ -17,6 +17,8 @@ With this app I'm trying to create a user-friendly experience for viewing and pu
 
 Through using this API app gives us a way, thoguh complex and advanced queries and aggregate functions, to find the specific and desired information such as: cheapest, most expensive, location filtering, total number of items in a table and so on.
 
+This database also lets users logon and see information on catergories made and also allows them to create listings.
+
 
 ## R2 Why is it a problem that needs solving?
 It's a necessary problem that needs solving as im sure recording clients, artist, artworks would be a lot of work. additionally having to delete an artwork or artist would become cluttered if in the form of paperwork. Having a database to represent clients and artists which can be easily manipulated and deleted makes the whole process more simple and more usable.

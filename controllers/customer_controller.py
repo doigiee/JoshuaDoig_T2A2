@@ -3,14 +3,13 @@ from init import db, bcrypt
 from datetime import date
 from models.customer import Customer, CustomerSchema
 from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt_identity, JWTManager, create_access_token, jwt_required
 
 customers_bp = Blueprint('customers', __name__, url_prefix='/customers')
 
 @customers_bp.route('/', methods=["GET"])
-#@jwt_required()
+@jwt_required()
 def get_all_customers():
-    # return 'get all'
     stmt = db.select(Customer)
     customers = db.session.scalars(stmt)
     return CustomerSchema(many=True).dump(customers)

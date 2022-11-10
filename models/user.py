@@ -4,8 +4,7 @@ from marshmallow import fields, validates
 from marshmallow.validate import Length, OneOf, And, Regexp
 from marshmallow.exceptions import ValidationError
 
-
-
+#representation of table in my database
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -18,10 +17,13 @@ class User(db.Model):
     # customers = db.relationship('Customer', back_populates='user', cascade='all, delete')
     # artists = db.relationship('Artist', back_populates='user', cascade='all, delete')
 
-
+#representation for flask CRUD methods
+# Marshmallow used for validation requirements
 class UserSchema(ma.Schema):
-    # customers = fields.List(fields.Nested('CustomerSchema', exclude=['user']))
-    # artists = fields.List(fields.Nested('ArtistSchema', exclude=['user']))
+    name = fields.String(required = False)
+    email = fields.String(required = True, validate = Regexp("^""([a-z])(?=.*"" [A-Z])?=.*(?=.*(?=.*\d)[])@$!%*?&[A-Za-z\d@$#$^()!%*?&]{8,}$", error="Only vaild emails will be accepted, please try again."))
+    password = fields.String(required = True, validate= Regexp("^""([a-z])(?=.*"" [A-Z])?=.*(?=.*(?=.*\d)[])@$!%*?&[A-Za-z\d@$#$^()!%*?&]{8,}$", error='Try another password, special characters are permitted.'))
+    is_admin = fields.String(required = True)
 
     class Meta:
         model = User
