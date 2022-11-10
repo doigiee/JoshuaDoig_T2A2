@@ -15,6 +15,7 @@ def get_all_artists():
     return ArtistSchema(many=True).dump(artists)
 
 @artists_bp.route('/<int:id>/', methods=["GET"])
+@jwt_required()
 def one_artist(id):
     stmt = db.select(Artist).filter_by(id=id)
     artist = db.session.scalar(stmt)

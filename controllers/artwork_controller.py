@@ -18,6 +18,7 @@ def get_all_arts():
     return ArtSchema(many=True).dump(arts)
 
 @arts_bp.route('/<int:id>/', methods=["GET"])
+@jwt_required()
 def one_art(id):
     stmt = db.select(Art).filter_by(id=id)
     art = db.session.scalar(stmt)
@@ -65,13 +66,14 @@ def create_art():
 #input the id to let the server know which art to delete
 @arts_bp.route("/delete/<int:id>", methods=["DELETE"])
 @jwt_required()
-def card_delete(id):
+def arts_delete(id):
     #get the user id invoking get_jwt_identity
     user_id = get_jwt_identity()
     #Find it in the db
     user = User.query.get(user_id)
     #Make sure it is in the database
-    if not user:
+    #only allowing admin the ability to delete artworks
+    if not user.is_admin:
         return abort(401, description="Invalid user")
 
     # find the art

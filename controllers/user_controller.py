@@ -39,7 +39,7 @@ def user_login():
     # user found by email
     stmt = db.select(User).filter_by(email=request.json['email'])
     user = db.session.scalar(stmt)
-    # When user exists and password the password entered is correct
+    # When user exists and password entered is correct
     if user and bcrypt.check_password_hash(user.password, request.json['password']):
         # return UserSchema(exclude=['password']).dump(user)
         token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))

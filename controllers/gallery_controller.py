@@ -15,6 +15,7 @@ def get_all_gallerys():
     return GallerySchema(many=True).dump(gallerys)
 
 @gallerys_bp.route('/<int:id>/', methods=["GET"])
+@jwt_required()
 def one_gallery(id):
     stmt = db.select(Gallery)#.filter_by(id=id)
     gallery = db.session.scalar(stmt)

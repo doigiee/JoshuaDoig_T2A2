@@ -15,6 +15,7 @@ def get_all_customers():
     return CustomerSchema(many=True).dump(customers)
 
 @customers_bp.route('/<int:id>/', methods=["GET"])
+@jwt_required()
 def one_customer(id):
     stmt = db.select(Customer).filter_by(id=id)
     customer = db.session.scalar(stmt)
