@@ -39,28 +39,28 @@ Creates a developer friendly workflow with less and cleaner code, great with con
 
 (For majority of outcomes a JWT token is required)
 
-| ENDPOINT | OUTCOME | HTTP |
-|----------|:-------------:|------:|
-| /users| Shows all users  |  GET |
-| /users/int| Shows specified user  |  GET |
-| /users/register| Creates a user   |  POST |
-| /users/login| logs in a user when using proper sign-in credentials, creates a JWT token   |  POST |
-| /arts | Shows all artworks  | GET |
-| /arts/int | Shows specified artwork  | GET |
-| /arts/create | allows users to create and enter an artwork  | POST |
-| /arts/delete/int | allows a authorized user to delete a artwork  | POST |
-| /gallery |  allows user to see all galleries | GET |
-| /gallery/int |  allows user to see a specified gallery | GET |
-| /gallery/create |  allows admin to create a gallery | POST |
-| /gallery/delete |  allows admin to delete a gallery | DELETE |
-| /artist |  allows user to see all galleries | GET |
-| /artist/int |  allows user to see a specified artist | GET |
-| /artist/create |  allows user to create a artist | POST |
-| /artist/delete |  allows admin to delete a artist | DELETE |
-| /customer |  allows user to see all galleries | GET |
-| /customer/int |  allows user to see a specified customer | GET |
-| /customer/create |  allows user to create a customer | POST |
-| /customer/delete |  allows admin to delete a customer | DELETE |
+| ENDPOINT         | OUTCOME                                      | HTTP  |
+|------------------|:--------------------------------------------:|------:|
+| /users           | Shows all users                              |  GET  |
+| /users/int       | Shows specified user                         |  GET  |
+| /users/register  | Creates a user                               |  POST |
+| /users/login     | logs in a user when using proper credentials |  POST |
+| /arts            | Shows all artworks                           | GET   |
+| /arts/int        | Shows specified artwork                      | GET   |
+| /arts/create     | allows users to create and enter an artwork  | POST  |
+| /arts/delete/int | allows a authorized user to delete a artwork | POST  |
+| /gallery         | allows user to see all galleries             | GET   |
+| /gallery/int     | allows user to see a specified gallery       | GET   |
+| /gallery/create  | allows admin to create a gallery             | POST  |
+| /gallery/delete  | allows admin to delete a gallery             | DELETE|
+| /artist          | allows user to see all galleries             | GET   |
+| /artist/int      | allows user to see a specified artist        | GET   |
+| /artist/create   | allows user to create a artist               | POST  |
+| /artist/delete   | allows admin to delete a artist              | DELETE|
+| /customer        | allows user to see all galleries             | GET   |
+| /customer/int    | allows user to see a specified customer      | GET   |
+| /customer/create | allows user to create a customer             | POST  |
+| /customer/delete | allows admin to delete a customer            | DELETE|
 
 
 ## R6 An ERD for your app
