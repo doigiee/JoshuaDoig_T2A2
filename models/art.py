@@ -5,8 +5,8 @@ from marshmallow.exceptions import ValidationError
 
 VALID_TYPES = ['John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels']
 #will need to come in and manually change this when adding more galleries or artists. its okay for now, works though for large-scale will need to optimise.
-VALID_GALLERY = [1, 2, 3]
-VALID_ARTISTS = [1, 2, 3, 4, 5, 6, 7]
+# VALID_GALLERY = [1, 2, 3]
+# VALID_ARTISTS = [1, 2, 3, 4, 5, 6, 7]
 
 #representation of table in my database
 class Art(db.Model):
@@ -24,10 +24,10 @@ class Art(db.Model):
     descriptions = db.Column(db.Text)
 
 #foreign key(s)
-    gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=False)
-    artist_id= db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
+    gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=True)
+    artist_id= db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=True)
 
-    # gallery = db.relationship("Gallery", back_populates="arts")
+    # gallery = db.relationship("Gallery", backref="art", cascade='all, delete')
     # artist = db.relationship("Artist", back_populates="arts")
 
 #representation for flask CRUD methods
@@ -44,8 +44,8 @@ class ArtSchema(ma.Schema):
     descriptions = fields.String(required = True, validate=Length(min=2, error="description must be at least 2 characters in length"))
 #foreign key(s)
     #error = "your artist id doesnt exist"),#
-    gallery_id = fields.Integer(required = True, validate=OneOf(VALID_GALLERY, error= "The gallery_id must be one of our registered galleries: eg. '1', '2','3', etc"))
-    artist_id = fields.Integer(required = True,  validate=OneOf(VALID_ARTISTS, error= "The artist_id must be a registered number: eg. '1', '2', '3', '4', '5', '6', '7', etc."))
+    gallery_id = fields.Integer(required = False)# validate=OneOf(VALID_GALLERY, error= "The gallery_id must be one of our registered galleries: eg. '1', '2','3', etc"))
+    artist_id = fields.Integer(required = False)# validate=OneOf(VALID_ARTISTS, error= "The artist_id must be a registered number: eg. '1', '2', '3', '4', '5', '6', '7', etc."))
     # gallery_id = fields.Integer(required = True, validate=Regexp('0123456789', error= "The gallery_id must be one of our registered galleries: eg. '1', '2', or '3'"))
     # artist_id = fields.Integer(required = True, validate=Regexp('0123456789', error= "The artist_id must be a registered number: eg. '1', '2', '3', '4', '5', '6' or '7'."))
 class Meta:

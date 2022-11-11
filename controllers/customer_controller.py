@@ -2,7 +2,7 @@ from flask import Blueprint, request, abort
 from init import db, bcrypt
 from datetime import date
 from models.customer import Customer, CustomerSchema
-from sqlalchemy.exc import IntegrityError
+from controllers.user_controller import authorize
 from flask_jwt_extended import create_access_token, get_jwt_identity, JWTManager, create_access_token, jwt_required
 
 customers_bp = Blueprint('customers', __name__, url_prefix='/customers')
@@ -21,7 +21,33 @@ def one_customer(id):
     customer = db.session.scalar(stmt)
     return CustomerSchema().dump(customer)
 
-    # return 'all_customers route'w
+@customers_bp.route('/create', methods=['POST'])
+@jwt_required()
+def create_customer():
+    data = CustomerSchema().load(request.json)
 
-    # if not authorize():
-    # return {'error': 'You must be an admin'}, 401
+    customer = Customer()
+    customer.name = data['name'],
+    customer.phone = data['phone'],
+    customer.address = data['address'],
+    customer.gallery_id = data['gallery_id']
+
+    # Add and commit customer to database
+    db.session.add(customer)
+    db.session.commit()
+    # let user know result
+    return CustomerSchema().dumps(customer), 201
+
+#input the id to let the server know which customer to delete
+@customers_bp.route("/delete/<int:id>", methods=["DELETE"])
+@jwt_required()
+def customer_delete(id):
+    authorize()
+    stmt = db.select(Customer).filter_by(id=id)
+    customer = db.session.scalar(stmt)
+    if customer:
+        db.session.delete(customer)
+        db.session.commit()
+        return {'message': f"Customer '{id}' was successfully deleted."}
+    else:
+        return {'error': f'Customer was not found with id {id} in our database.'}, 404

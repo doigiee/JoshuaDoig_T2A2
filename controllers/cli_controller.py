@@ -1,33 +1,32 @@
 from flask import Blueprint
 from init import db, bcrypt
-from datetime import date, datetime
+#model imports
 from models.art import Art
 from models.artist import Artist
 from models.customer import Customer
 from models.gallery import Gallery
 from models.user import User
 
-#if wanting to drop tables manually
-# drop table customers;
-# drop table artworks;
-# drop table artists;
-# drop table gallerys;
-
 db_commands = Blueprint('db', __name__)
 
+#create all tables
 @db_commands.cli.command('create')
 def create_db():
     db.create_all()
     print("Tables created")
 
+#drop all tables
 @db_commands.cli.command('drop')
 def drop_db():
     db.drop_all()
     print("Tables dropped")
 
+#seed all tables in database with data provided
 @db_commands.cli.command('seed')
 
+#seed function
 def seed_db():
+# gallery inserts into the database
     gallerys = [
         Gallery(
             name = 'Brightwaters',
@@ -47,94 +46,85 @@ def seed_db():
     ]
     db.session.add_all(gallerys)
     db.session.commit()
-
+# customer inserts into the database
     customers = [
         Customer(
             name = 'Disnay Price',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0436987456',
             address = '47 field Street, Brisbane',
             gallery_id = 1
         ),
         Customer(
             name = 'Donna Monopoly',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0411224455',
             address = '81 Ashfrank Street, Brisbane',
             gallery_id = 2
         ),
         Customer(
             name = 'Shooter McGavin',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0411445588',
             address = '13 Kings Drive, Brisbane',
             gallery_id = 1
         ),
         Customer(
             name = 'Bails Onran',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             phone = '0477441111',
             address = '14 Kings Drive, Brisbane',
             gallery_id = 2
         )
     ]
+# add and commits to database
     db.session.add_all(customers)
     db.session.commit()
-
+# artist inserts into the database
     artists = [
         Artist(
             name = 'John Smithers',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '2 Coombayar Street, Adelaide',
             phone = '0411235558',
             gallery_id = 1
         ),
         Artist(
             name = 'Sandra Bullocks',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '43 Epistien Road, Cambera',
             phone = '0421555668',
             gallery_id = 2
         ),
         Artist(
             name = 'Jimmy Barnes',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '3 Laney Lane, Brisbane',
             phone = '0477889989',
             gallery_id = 1
         ),
         Artist(
             name = 'Matthew Finley',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '56 Gumbear Street, Lizbane',
             phone = '0465656567',
             gallery_id = 3
         ),
         Artist(
             name = 'Chris Hemsrunt',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '78 Crocodile Road, Brisbane',
             phone = '0412345679',
             gallery_id = 1
         ),
         Artist(
             name = 'Sammy Tammy',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '91 Nikey Cresent, Sydney',
             phone = '0455555556',
             gallery_id = 3
         ),
         Artist(
             name = 'Jacob Googels',
-            # password=bcrypt.generate_password_hash('Hello').decode('utf-8'),
             location = '41 Crikey Lane, Adelaide',
             phone = '0432546581',
             gallery_id = 1
         )
     ]
+# add and commits to database
     db.session.add_all(artists)
     db.session.commit()
-
+# artwork inserts into the database
     artworks = [
         Art(
             title = 'Apple & Rock',
@@ -319,6 +309,7 @@ def seed_db():
             artist_id = 7
         )
     ]
+# add and commits to database
     db.session.add_all(artworks)
     db.session.commit()
 
@@ -345,38 +336,7 @@ def seed_db():
             name = "Random Man"
         )
     ]
+#add and commits all users including one admin into database
     db.session.add_all(users)
-
-    # committing to users db
     db.session.commit()
-    print("Table seeded")
-
-    # admin_user = User(
-    #     email = "admin@super.com",
-    #     password = "password123",
-    #     admin = True
-    # )
-    # db.session.add(admin_user)
-
-    # user1 = User(
-    #     email = "user1@super.com",
-    #     password = "123456"
-    # )
-    # db.session.add(user1)
-
-    # user2 = User(
-    #     email = "user2@super.com",
-    #     password = "654321"
-    # )
-    # db.session.add(user2)
-
-    # user3 = User(
-    # email = "user3@super.com",
-    # password = "778899"
-    # )
-    # db.session.add(user3)
-
-
-    # # committing to users db
-    # db.session.commit()
-    # print("Table seeded")
+    print("Tables seeded")

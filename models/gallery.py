@@ -16,11 +16,16 @@ class Gallery(db.Model):
 
     # art = db.relationship("Art", backref="gallerys")
 
+#decided not to use cascade delete, figured that just because a gallery can be closed, 
+# doesn't necessary mean that artworks, customers, or artists dissapear, they will manually
+#just need to be given a new gallery.
 
-    # art = db.relationship("Gallery", backref="gallerys")
-    # artist = db.relationship("Artist", backref="gallerys")
-    # customer = db.relationship("Customer", backref="gallerys")
+    artists = db.relationship("Artist", backref="gallery")#, cascade='all, delete')
+    customers = db.relationship("Customer", backref="gallery")#, cascade='all, delete')
+    arts = db.relationship("Art", backref="gallery")#, cascade='all, delete')
 
+
+    
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements
 class GallerySchema(ma.Schema):
