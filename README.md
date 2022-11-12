@@ -45,28 +45,34 @@ ORM or Object Relational Mapping helps create a developer friendly workflow with
 
 ## R5 Document all endpoints for your API
 
-| ROUTE            | RESULT                                       | METHOD    |
-|------------------|:--------------------------------------------:|----------:|
-| /users           | Shows all users                              |  GET      |
-| /users/register  | Creates a user                               |  POST     |
-| /users/login     | logs in a user when using proper credentials |  POST     |
-| /arts            | Shows all artworks                           |  GET      |
-| /arts/int        | Shows specified artwork                      |  GET      |
-| /arts/create     | allows users to create and enter an artwork  |  POST     |
-| /arts/delete/int | allows a authorized user to delete a artwork |  POST     |
-| /gallery         | allows user to see all galleries             |  GET      |
-| /gallery/int     | allows user to see a specified gallery       |  GET      |
-| /gallery/create  | allows admin to create a gallery             |  POST     |
-| /gallery/delete  | allows admin to delete a gallery             |  DELETE   |
-| /artists         | allows user to see all galleries             |  GET      |
-| /artists/int     | allows user to see a specified artist        |  GET      |
-| /artists/create  | allows user to create a artist               |  POST     |
-| /artist/delete   | allows admin to delete a artist              |  DELETE   |
-| /customer        | allows user to see all galleries             |  GET      |
-| /customer/int    | allows user to see a specified customer      |  GET      |
-| /customer/create | allows user to create a customer             |  POST     |
-| /customer/delete | allows admin to delete a customer            |  DELETE   |
-
+| ROUTE              | RESULT                                       | METHOD       |
+|--------------------|:--------------------------------------------:|-------------:|
+| /users             | Shows all users                              |  GET         |
+| /users/register    | Creates a user                               |  POST        |
+| /users/login       | logs in a user when using proper credentials |  POST        |
+| /arts              | Shows all artworks                           |  GET         |
+| /arts/int          | Shows specified artwork                      |  GET         |
+| /arts/create       | allows users to create and enter an artwork  |  POST        |
+| /arts/delete/int   | allows a authorized user to delete a artwork |  POST        |
+| /gallery           | allows user to see all galleries             |  GET         |
+| /gallery/int       | allows user to see a specified gallery       |  GET         |
+| /gallery/create    | allows admin to create a gallery             |  POST        |
+| /gallery/delete    | allows admin to delete a gallery             |  DELETE      |
+| /artists           | allows user to see all galleries             |  GET         |
+| /artists/int       | allows user to see a specified artist        |  GET         |
+| /artists/create    | allows user to create a artist               |  POST        |
+| /artist/delete     | allows admin to delete a artist              |  DELETE      |
+| /customer          | allows user to see all galleries             |  GET         |
+| /customer/int      | allows user to see a specified customer      |  GET         |
+| /customer/create   | allows user to create a customer             |  POST        |
+| /customer/delete   | allows admin to delete a customer            |  DELETE      |
+| /customer/delete   | allows admin to delete a customer            |  DELETE      |
+| /customer/delete   | allows admin to delete a customer            |  DELETE      |
+| /customer/delete   | allows admin to delete a customer            |  DELETE      |
+| /customers/patch/2 | allows admin to delete a customer            |  PUT/PATCH   |
+| /gallerys/patch/2  | allows admin to delete a customer            |  PUT/PATCH   |
+| /artists/patch/2   | allows admin to delete a customer            |  PUT/PATCH   |
+| /arts/patch/2      | allows admin to delete a customer            |  PUT/PATCH   |
 
 And Authorize JWT function is used to allow only admin to create galleries, delete an artist, delete an artwork, delete a customer or create and delete a gallery.
 
@@ -297,6 +303,48 @@ OR
     "message": "Customer '1' was successfully deleted."
 }
 
+### customers/patch/2
+{
+    "id": 2,
+    "name": "Hell",
+    "phone": "048935655",
+    "address": "81 Ashfrank Street, Brisbane",
+    "gallery_id": 3
+}
+
+### gallerys/patch/2
+{
+    "id": 2,
+    "name": "Hell",
+    "location": "43 sherbert",
+    "phone": "048935655"
+}
+
+### artists/patch/2
+{
+    "id": 2,
+    "name": "Hell",
+    "location": "43 sherbert",
+    "phone": "048935655",
+    "gallery_id": 2
+}
+
+### arts/patch/2
+{
+    "descriptions": "A beautiful and lengthy piece which could adorn an open outdoor setting. The colors dance together to create a optical illusion",
+    "kilograms": "20kg",
+    "price": "$4,555",
+    "dimensions": "43 x 43",
+    "creator": "Sandra Bullocks",
+    "created": "1988-07-16",
+    "artist_id": 2,
+    "title": "Hell",
+    "medium": "wood",
+    "gallery_id": 2,
+    "color_pallet": "blue, yellow, green, purple"
+}
+
+
 
 ## R6 An ERD for your app
 
@@ -312,10 +360,14 @@ Artworks also have a one-and-only-one relation to Artists and finally Artists ha
 Then each table has their specified column entry data, as listed and shown in image and shown throughout models and controllers.
 All tables were given a primary key (PK) and a foreign key (FK) when being represented in another table, as a way to show their relations/connections.
 
-Artwork entries - PK id, title, creator, dimensions, color_pallet, kilograms, price, medium, created, descriptions, FK  galleries, FK artists.
-Artist entries - PK id, name, location, phone, FK gallery
-Customer entries - PK id, name, phone, address, FK gallery.
-Gallery entries - PK id, name, location, phone.
+**Artwork entries** - PK id, title, creator, dimensions, color_pallet, kilograms, price, medium, created, descriptions, FK  galleries, FK artists.
+
+**Artist entries** - PK id, name, location, phone, FK gallery.
+
+**Customer entries** - PK id, name, phone, address, FK gallery.
+
+**Gallery entries** - PK id, name, location, phone.
+
 
 These Tables are all listed as Models which are connected to controllers and the controllers are used to make changes to my database and return a view to users.
 
@@ -324,33 +376,33 @@ These Tables are all listed as Models which are connected to controllers and the
 
 Main libraries and third party services used:
 
-Postman - Used like a google chrome search engine to test routes and check CRUD functionality through GET, POST, DELETE requests.
+<u>Postman</u> - Used like a google chrome search engine to test routes and check CRUD functionality through GET, POST, DELETE requests.
   
-Flask - lightweight WSGI web application framework in Python.
+<u>Flask</u> - lightweight WSGI web application framework in Python.
 
-Marshmallow - is an ORM/ODM/framework-agnostic which was used to convert complex datatypes to and from native Python datatypes.
+<u>Marshmallow</u> - is an ORM/ODM/framework-agnostic which was used to convert complex datatypes to and from native Python datatypes.
 
-Flask-Marshmallow- added additional features to marshmallow.
+<u>Flask-Marshmallow</u>- added additional features to marshmallow.
 
-SQLAlchemy - toolkit and ORM which used offer powers like SQL.
+<u>SQLAlchemy</u> - toolkit and ORM which used offer powers like SQL.
 
-Flask-SQLAlchemy - added support for SQLAlchemy which simplified using SQLAlchemy + Flask.
+<u>Flask-SQLAlchemy</u> - added support for SQLAlchemy which simplified using SQLAlchemy + Flask.
 
-marshmallow-sqlalchemy - serialization library.
+<u>marshmallow-sqlalchemy</u> - serialization library.
 
-Werkzeug - a WSGI web application library, which allowed me to see bugs and errors in very comprehensive and useful ways.
+<u>Werkzeug</u> - a WSGI web application library, which allowed me to see bugs and errors in very comprehensive and useful ways.
 
-pip-review - was used to check update requirements, though decided not to update because last time I did, it broke my app, though it was still useful to check for newer installs which could have been implemented in requirements.txt.
+<u>pip-review</u> - was used to check update requirements, though decided not to update because last time I did, it broke my app, though it was still useful to check for newer installs which could have been implemented in requirements.txt.
 
-Bcrypt - was used in the process of encryption in order to increase security.
+<u>Bcrypt</u> - was used in the process of encryption in order to increase security.
 
-Jinja2 - templating engine.
+<u>Jinja2</u> - templating engine.
 
-six -  provided utility functions for smoothing over the differences between Python versions.
+<u>six</u> -  provided utility functions for smoothing over the differences between Python versions.
 
-click - creating beautiful command line interfaces
+<u>click</u> - creating beautiful command line interfaces
 
-PyJWT - Python library used to encode and decode JSON Web Tokens (JWT)
+<u>PyJWT</u> - Python library used to encode and decode JSON Web Tokens (JWT)
 
 
 ## R8 Describe your projects models in terms of the relationships they have with each other
@@ -376,7 +428,7 @@ R9: what your database is planned to be, based on the ERD
 Was considering using trello though as it wasn't required I instead felt more comfortable mainly using pen on paper to document timestamps and milestones. When a task was started, I wrote the task description in my book and once it was completed, I wrote an update with any notes or concerns which I had along with time spent on activities, recreation, personal matters and so on. Similar to a reflective journal.
 If there were problems with a function, or in general, I wrote it down into a list, as to reflect on it at a later time and give myself a list of tasks I needed to get done in order of priority and logic. It also helped me get a grasp for how big a task might be or how long the task might take by comparing it to previous tasks done either earlier that day or the previous day(s).
 
-Example images provided below:
+**Example images provided below:**
 
 ![image](./docs/example_of_notes.jpg)
 ![image](./docs/example_of_notes_2.jpg)

@@ -42,6 +42,7 @@ def create_gallery():
     # let admin know the result
     return GallerySchema().dumps(gallery), 201
 
+#to patch a gallery
 @gallerys_bp.route('/<int:id>/', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_single_gallery(id):
