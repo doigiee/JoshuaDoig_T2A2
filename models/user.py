@@ -1,7 +1,6 @@
 from init import db, ma
 from marshmallow import fields
-from marshmallow import fields
-from marshmallow.validate import Length, OneOf, Regexp
+from marshmallow.validate import Length, Regexp
 
 
 #representation of table in my database
@@ -13,9 +12,6 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-
-    # customers = db.relationship('Customer', back_populates='user', cascade='all, delete')
-    # artists = db.relationship('Artist', back_populates='user', cascade='all, delete')
 
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements

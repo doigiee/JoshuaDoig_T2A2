@@ -12,13 +12,13 @@ class Gallery(db.Model):
     location = db.Column(db.Text)
     phone = db.Column(db.Text)
 
-# decided not to use cascade delete, figured that just because a gallery can be closed, 
-# doesn't necessary mean that artworks, customers, or artists disappear, they will manually
-# just need to be given a new gallery through a PATCH or database entry.
+# made it so that if a gallery is deleted, all associated, artists, artworks and customers are deleted.
+#Thus this could represent a closure sort of situation.
 
-    artists = db.relationship("Artist", backref="gallery")
-    customers = db.relationship("Customer", backref="gallery")
-    arts = db.relationship("Art", backref="gallery")
+    artists = db.relationship("Artist", backref="gallery", cascade='all, delete')
+    customers = db.relationship("Customer", backref="gallery", cascade='all, delete')
+    arts = db.relationship("Art", backref="gallery", cascade='all, delete')
+    
 
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements

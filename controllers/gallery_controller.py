@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort
+from flask import Blueprint, request
 from init import db
 from models.gallery import Gallery, GallerySchema
 from controllers.user_controller import authorize

@@ -1,7 +1,6 @@
 from init import db, ma
 from marshmallow import fields
-from marshmallow.validate import Length, OneOf,Regexp
-
+from marshmallow.validate import Length, Regexp
 
 #representation of table in my database
 class Customer(db.Model):
@@ -25,6 +24,6 @@ class CustomerSchema(ma.Schema):
     gallery_id = fields.Integer(required = False) 
     
     class Meta:
-        fields = ('id', 'name', 'phone', 'address', 'gallerys') 
+        fields = ('id', 'name', 'phone', 'address', 'gallery_id') 
         ordered = True
 

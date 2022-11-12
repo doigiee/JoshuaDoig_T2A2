@@ -1,8 +1,6 @@
 from init import db, ma
 from marshmallow import fields
-from marshmallow.validate import Length, OneOf, And, Regexp
-from marshmallow.exceptions import ValidationError
-
+from marshmallow.validate import Length
 
 #representation of table in my database
 class Artist(db.Model):
@@ -25,7 +23,6 @@ class ArtistSchema(ma.Schema):
     phone = fields.String(required = True, validate=Length(min=9, error='phone number entries must be at least 9 numbers long'))
 #foreign key(s)
     gallery_id = fields.Integer(required = False) 
-    artist_id = fields.Integer(required = False) 
     
     class Meta:
         fields = ('id', 'name', 'location', 'phone', 'gallery_id') 

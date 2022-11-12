@@ -277,15 +277,8 @@ OR
 }
 
 ### /customers/create
-{
-    "error": {
-        "gallery_id": [
-            "Unknown field."
-        ]
-    }
-}
+{"id": 5, "name": "Hello", "phone": "0489356555", "address": "47 walllably way, Sydney", "gallery_id": 3}
 
-currently working on a fix
 
 ### /customers/delete
 {

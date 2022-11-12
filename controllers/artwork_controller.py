@@ -4,9 +4,6 @@ from datetime import date
 from models.art import Art, ArtSchema
 from controllers.user_controller import authorize
 from flask_jwt_extended import jwt_required
-from marshmallow import fields, validates
-
-from models.user import User, UserSchema
 
 arts_bp = Blueprint('arts', __name__, url_prefix='/arts')
 
