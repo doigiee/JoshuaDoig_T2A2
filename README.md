@@ -1,5 +1,7 @@
 # T2A2
 
+NOTE: was going to place all, 'source code for your entire project' in a /src folder, as per requirements, though it seemed to break the app for multiple reasons (possibly due to the .venv or maybe pychache folders being moved). Though these files wont be included in submission I'd rather not risk it and thus have submitted assignment as constructed.
+
 1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided) and install requirements.txt while in your .venv environment
 - python3 -m venv .venv
 - source .venv/bin/activate
@@ -208,6 +210,11 @@ And Authorize JWT function is used to allow only admin to create galleries, dele
     "message": "Gallery '4' was successfully deleted."
 }
 
+### example of user trying to delete someting they arent authorized to delete
+{
+    "error": "401 Unauthorized: The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required."
+}
+
 ### /artists
 [
     {
@@ -311,6 +318,8 @@ These Tables are all listed as Models which are connected to controllers and the
 ## R7 Detail any third party services that your app will use
 
 Main libraries and third party services used:
+
+Postman - Used like a google chrome search engine to test routes and check CRUD functionality through GET, POST, DELETE requests.
   
 Flask - lightweight WSGI web application framework in Python.
 
@@ -326,8 +335,6 @@ marshmallow-sqlalchemy - serialization library.
 
 Werkzeug - a WSGI web application library, which allowed me to see bugs and errors in very comprehensive and useful ways.
 
-Postman - Used like a google chrome search engine to test routes and check CRUD functionality through GET, POST, DELETE requests.
-
 pip-review - was used to check update requirements, though decided not to update because last time I did, it broke my app, though it was still useful to check for newer installs which could have been implemented in requirements.txt.
 
 Bcrypt - was used in the process of encryption in order to increase security.
@@ -339,8 +346,6 @@ six -  provided utility functions for smoothing over the differences between Pyt
 click - creating beautiful command line interfaces
 
 PyJWT - Python library used to encode and decode JSON Web Tokens (JWT)
-
-... 
 
 
 ## R8 Describe your projects models in terms of the relationships they have with each other
@@ -372,3 +377,7 @@ Example images provided below:
 ![image](./docs/example_of_notes_2.jpg)
 ![image](./docs/example_of_notes_3.jpg)
 ![image](./docs/example_of_notes_4.jpg)
+
+Something else to mention here is that I also did a quick sketch on pen and paper for my ERD which helped me understand how my database would be constructed, sometimes creating diagrams on diagrams.net can become slower than a pen on paper method which is why found this useful. In other words, instead of being slowed down in the moment, (as I am not a pro at diagrams.net), I was instantly able to map out my ERD freely.
+
+

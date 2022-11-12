@@ -16,10 +16,10 @@ class User(db.Model):
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements
 class UserSchema(ma.Schema):
-    name = fields.String(required = False)
+    name = fields.String(required = False, validate=Regexp('^[a-zA-Z ]+$', error= 'Only Letters and spaces are accepted as inputs for names'))
     email = fields.String(required = True, validate = Regexp("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", error="Only vaild emails will be accepted, please try again."))
     password = fields.String(required = True, validate= Regexp("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", error='Try another password, special characters are permitted.'))
-    is_admin = fields.String(required = True)
+    is_admin = fields.String(required = True) #not going to validate this one
 
     class Meta:
         model = User

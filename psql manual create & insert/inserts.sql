@@ -5,12 +5,6 @@ values
     ('Schulshetch', '45 Chambers Road, Sydney', '0471717171'),
     ('Artsalive', 'Goombar, Brisbane', '0477889989');
 
--- insert into galleries (name, location, phone) values (
---     ('Brightwaters Art', '131 Simple Road, Brisbane', '0415566991'),
---     ('Brakenrith Art', '45 Chambers Road, Sydney', '0471717171'), 
---     ('Aligance School of Art', 'Goombar, Brisbane', '0477889989')
--- );
-
 -- customer inserts
 insert into customers (name, phone, address, gallery_id) 
 values 
@@ -31,7 +25,7 @@ values
     ('Jacob Googels', '41 Crikey Lane, Adelaide', '0432546581', 1);
 
 -- artworks inserts
--- SET datestyle = dmy;         ->->->->(used to set the database to the correct datestyle)
+--SET datestyle = dmy;      --   ->->->->(used to set the database to the correct datestyle, if not working)
 insert into artworks (title, creator, dimensions, color_pallet, kilograms, price, medium, created, descriptions, gallery_id, artist_id) 
 values
     ('Apple & Rock', 'John Smithers', '1m x 1m', 'red, grey', '10kg', '$150', 'Oil on Canvas', '15/07/1999', 'A simple painting, done by a minor, which depicts a apple and a rock occupying an empty field', 1, 1),

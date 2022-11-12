@@ -28,21 +28,18 @@ class Art(db.Model):
 
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements
-#decided not to perfectly follow plan of ERD though did implement some constraints and messages in terms of input-able data and constraints
-# left marshmallow.validate constraints, on all Schemas, fairly relaxed as to permit creative and open-ended entries. 
-# Though used some of marshmallow.validate below to show you that i know how to use them.
 class ArtSchema(ma.Schema):
 # not all fields need to be filled, sometimes artworks are untitled, thus i left them required = false
     title = fields.String(required = False, validate=And(
         Length(min=2, error='Your title needs to be at least 2 characters long'), 
         Regexp('^[a-zA-Z0-9 ]+$', error= 'Letters, numbers and spaces are the only accepted inputs for a title')))
-    creator = fields.String(required = False)
-    dimensions = fields.String(required = False) 
+    creator = fields.String(required = False, validate=Length(min=2, error='Your creator needs to be at least 2 characters long'))
+    dimensions = fields.String(required = False, validate=Regexp('^[a-zA-Z0-9 ]+$', error= 'Letters, numbers and spaces are the only accepted inputs for dimensions')) 
     color_pallet = fields.String(required = False, validate=OneOf(VALID_COLOR_PALLETS))
-    kilograms = fields.String(required = False)
-    price = fields.String(required = True)
-    medium = fields.String(required = False)
-    created = fields.String(required = False)
+    kilograms = fields.String(required = False, validate=Regexp('^[a-zA-Z0-9 ]+$', error= 'Letters, numbers and spaces are the only accepted inputs for kilograms'))
+    price = fields.String(required = True, validate=Regexp('^[a-zA-Z0-9$ ]+$', error= 'Letters, numbers, spaces and $ symbol are the only accepted inputs for a price'))
+    medium = fields.String(required = False, validate=Regexp('^[a-zA-Z0-9 ]+$', error= 'Letters, numbers and spaces are the only accepted inputs for a medium'))
+    created = fields.String(required = False) #uses date today as to why not needed to validate
     descriptions = fields.String(required = True, validate=Length(min=2, error="description must be at least 2 characters in length"))
 #foreign key(s)
     gallery_id = fields.Integer(required = False)
@@ -51,14 +48,4 @@ class ArtSchema(ma.Schema):
 class Meta:
     fields = ('id', 'title', 'creator', 'dimensions', 'color_pallet', 'kilograms', 'price', 'medium', 'created', 'descriptions', 'gallery_id', 'artist_id') 
     ordered = True
-
-
-# "OneOf" 
-# example though not used in final production
-# maybe not the best thing, as if a new artwork is created it can only be one of these listed registered artists, basically ruling out the use of creating new artists,
-# though as it's showing I can use 'Oneof' I'll leave this here as a demonstration, though in final production would probably advise omitting this use of 'Oneof'. 
-# it just means for the meantime the dev would need to come in here and insert all new registered artists upon reviewing that they are infact an artist they wish to register.
-#VALID_TYPES = ['John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels']
-#validate=OneOf(VALID_TYPES, error= "The creator must be one of our registered artists: 'John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels'."))
-
     
