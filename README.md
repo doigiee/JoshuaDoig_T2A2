@@ -2,7 +2,10 @@
 
 NOTE: was going to place all, 'source code for your entire project' in a /src folder, as per requirements, though it seemed to break the app for multiple reasons (possibly due to the .venv or maybe pychache folders being moved). Though these files wont be included in submission I'd rather not risk it and thus have submitted assignment as constructed.
 
-1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided) and install requirements.txt while in your .venv environment
+1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided -: Example of database_url and jwt_secret_key (if lost or confused)
+(DATABASE_URL=postgresql+psycopg2://doigiee:ectjyrj76@127.0.0.1:5432/art_gallery)
+(JWT_SECRET_KEY=art is good):-
+- and install requirements.txt while in your .venv environment 
 - python3 -m venv .venv
 - source .venv/bin/activate
 - pip install -r requirements.txt
@@ -13,6 +16,8 @@ NOTE: was going to place all, 'source code for your entire project' in a /src fo
    (```flask db create && flask db seed && flask db drop``` for shorthand).
    An alternative would be to, go into 'extra folder' and find the file 'create_tables.sql' to use to create the tables and 'inserts.sql' to insert the data into the tables.
 5. Open postman using the route intende, ```flask run``` while in your .venv and send GET, POST, DELETE... requests, while on your intended  URI channel, to  see, create or delete 'gallerys', 'arts', 'artists' and 'customers' seeded database information (some need admin//dev sign-in credentials or a JWT security token).
+
+
 
 ## R1 Identification of the problem you are trying to solve by building this particular app
 
@@ -53,9 +58,9 @@ ORM or Object Relational Mapping helps create a developer friendly workflow with
 | /gallery/int     | allows user to see a specified gallery       |  GET      |
 | /gallery/create  | allows admin to create a gallery             |  POST     |
 | /gallery/delete  | allows admin to delete a gallery             |  DELETE   |
-| /artists          | allows user to see all galleries            |  GET      |
-| /artists/int      | allows user to see a specified artist       |  GET      |
-| /artists/create   | allows user to create a artist              |  POST     |
+| /artists         | allows user to see all galleries             |  GET      |
+| /artists/int     | allows user to see a specified artist        |  GET      |
+| /artists/create  | allows user to create a artist               |  POST     |
 | /artist/delete   | allows admin to delete a artist              |  DELETE   |
 | /customer        | allows user to see all galleries             |  GET      |
 | /customer/int    | allows user to see a specified customer      |  GET      |
