@@ -48,6 +48,28 @@ def create_art():
     # let user know result
     return ArtSchema().dumps(art), 201
 
+@arts_bp.route('/<int:id>/', methods=['PUT', 'PATCH'])
+@jwt_required()
+def update_single_artwork(id):
+    stmt = db.select(Art).filter_by(id=id)
+    art = db.session.scalar(stmt)
+    if art:
+        art.title = request.json.get('title') or art.title
+        art.creator = request.json.get('creator') or art.creator
+        art.dimensions = request.json.get('dimensions') or art.dimensions
+        art.color_pallet = request.json.get('color_pallet') or art.color_pallet
+        art.kilograms = request.json.get('kilograms') or art.kilograms
+        art.price = request.json.get('price') or art.price
+        art.medium = request.json.get('medium') or art.medium
+        art.created = request.json.get('created') or art.created
+        art.descriptions = request.json.get('descriptions') or art.descriptions
+        art.gallery_id = request.json.get('gallery_id') or art.gallery_id
+        art.artist_id = request.json.get('artist_id') or art.artist_id
+        db.session.commit()
+        return ArtSchema().dump(art)
+    else:
+        return {'error': f'Artwork was not found with the matching id of {id}, please try again.'}, 404
+
 #input the id to let the server know which art to delete
 @arts_bp.route("/delete/<int:id>", methods=["DELETE"])
 @jwt_required()

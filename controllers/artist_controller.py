@@ -1,10 +1,8 @@
-from flask import Blueprint, request, abort
-from init import db, bcrypt
-from datetime import date
+from flask import Blueprint, request
+from init import db
 from models.artist import Artist, ArtistSchema
 from controllers.user_controller import authorize
-from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import create_access_token, get_jwt_identity, JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import jwt_required
 
 artists_bp = Blueprint('artists', __name__, url_prefix='/artists')
 
@@ -21,6 +19,7 @@ def one_artist(id):
     stmt = db.select(Artist).filter_by(id=id)
     artist = db.session.scalar(stmt)
     return ArtistSchema().dump(artist)
+     
 
 @artists_bp.route('/create', methods=['POST'])
 @jwt_required()
@@ -38,6 +37,21 @@ def create_artist():
     db.session.commit()
     # let user know result
     return ArtistSchema().dumps(artist), 201
+
+@artists_bp.route('/<int:id>/', methods=['PUT', 'PATCH'])
+@jwt_required()
+def update_single_artist(id):
+    stmt = db.select(Artist).filter_by(id=id)
+    artist = db.session.scalar(stmt)
+    if artist:
+        artist.name = request.json.get('name') or artist.name
+        artist.location = request.json.get('location') or artist.location
+        artist.phone = request.json.get('phone') or artist.phone
+        artist.gallery_id = request.json.get('gallery_id') or artist.gallery_id
+        db.session.commit()
+        return ArtistSchema().dump(artist)
+    else:
+        return {'error': f'Artist was not found with the matching id of {id}, please try again.'}, 404
 
 #input the id to let the server know which artist to delete
 @artists_bp.route("/delete/<int:id>", methods=["DELETE"])

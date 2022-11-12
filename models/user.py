@@ -1,8 +1,8 @@
 from init import db, ma
 from marshmallow import fields
-from marshmallow import fields, validates
-from marshmallow.validate import Length, OneOf, And, Regexp
-from marshmallow.exceptions import ValidationError
+from marshmallow import fields
+from marshmallow.validate import Length, OneOf, Regexp
+
 
 #representation of table in my database
 class User(db.Model):

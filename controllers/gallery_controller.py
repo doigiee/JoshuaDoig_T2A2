@@ -1,10 +1,8 @@
 from flask import Blueprint, request, abort
-from init import db, bcrypt
-from datetime import date
+from init import db
 from models.gallery import Gallery, GallerySchema
 from controllers.user_controller import authorize
-from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import create_access_token, get_jwt_identity, JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import jwt_required
 
 gallerys_bp = Blueprint('gallerys', __name__, url_prefix='/gallerys')
 
@@ -43,6 +41,20 @@ def create_gallery():
     db.session.commit()
     # let admin know the result
     return GallerySchema().dumps(gallery), 201
+
+@gallerys_bp.route('/<int:id>/', methods=['PUT', 'PATCH'])
+@jwt_required()
+def update_single_gallery(id):
+    stmt = db.select(Gallery).filter_by(id=id)
+    gallery = db.session.scalar(stmt)
+    if gallery:
+        gallery.name = request.json.get('name') or gallery.name
+        gallery.location = request.json.get('location') or gallery.location
+        gallery.phone = request.json.get('phone') or gallery.phone
+        db.session.commit()      
+        return GallerySchema().dump(gallery)
+    else:
+        return {'error': f'Gallery was not found with the matching id of {id}, please try again.'}, 404
 
 #input the id to let the server know which gallery to delete
 @gallerys_bp.route("/delete/<int:id>", methods=["DELETE"])

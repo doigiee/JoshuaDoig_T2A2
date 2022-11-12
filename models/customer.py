@@ -1,7 +1,7 @@
 from init import db, ma
-from marshmallow import fields, validates
-from marshmallow.validate import Length, OneOf, And, Regexp
-from marshmallow.exceptions import ValidationError
+from marshmallow import fields
+from marshmallow.validate import Length, OneOf,Regexp
+
 
 #representation of table in my database
 class Customer(db.Model):
@@ -15,11 +15,6 @@ class Customer(db.Model):
 #foreign key(s)
     gallery_id = db.Column(db.Integer, db.ForeignKey('gallerys.id'), nullable=True)
 
-    # customer = db.relationship('Customer', backref='gallery', cascade='all, delete')
-
-    # gallery = db.relationship("gallery", backref="customer", cascade='all, delete')
-    # gallery_id = db.relationship("Gallery", backref="customers")
-
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements
 class CustomerSchema(ma.Schema):
@@ -27,7 +22,7 @@ class CustomerSchema(ma.Schema):
     phone = fields.String(required = True, validate=Length(min=9, error='phone number entries must be at least 9 numbers long'))
     address = fields.String(required = False) 
 #foreign key(s)
-    gallery_id = fields.Integer(required = False) #validate=OneOf(VALID_GALLERIES_ID, error= "The gallery_id must be one of our registered galleries: '1', '2', or '3'"))
+    gallery_id = fields.Integer(required = False) 
     
     class Meta:
         fields = ('id', 'name', 'phone', 'address', 'gallerys') 

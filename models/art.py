@@ -1,12 +1,6 @@
 from init import db, ma
-from marshmallow import fields, validates
-from marshmallow.validate import Length, OneOf, And, Regexp
-from marshmallow.exceptions import ValidationError
-
-VALID_TYPES = ['John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels']
-#will need to come in and manually change this when adding more galleries or artists. its okay for now, works though for large-scale will need to optimise.
-# VALID_GALLERY = [1, 2, 3]
-# VALID_ARTISTS = [1, 2, 3, 4, 5, 6, 7]
+from marshmallow import fields
+from marshmallow.validate import Length
 
 #representation of table in my database
 class Art(db.Model):
@@ -32,9 +26,10 @@ class Art(db.Model):
 
 #representation for flask CRUD methods
 # Marshmallow used for validation requirements
+#decided not to perfectly follow plan of ERD though did implement some constraints and messages in terms of input-able data and constraints
 class ArtSchema(ma.Schema):
     title = fields.String(required = False)
-    creator = fields.String(required = False, validate=OneOf(VALID_TYPES, error= "The creator must be one of our registered artists: 'John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels'."))
+    creator = fields.String(required = False)
     dimensions = fields.String(required = False) 
     color_pallet = fields.String(required = False)
     kilograms = fields.String(required = False)
@@ -44,12 +39,21 @@ class ArtSchema(ma.Schema):
     descriptions = fields.String(required = True, validate=Length(min=2, error="description must be at least 2 characters in length"))
 #foreign key(s)
     #error = "your artist id doesnt exist"),#
-    gallery_id = fields.Integer(required = False)# validate=OneOf(VALID_GALLERY, error= "The gallery_id must be one of our registered galleries: eg. '1', '2','3', etc"))
-    artist_id = fields.Integer(required = False)# validate=OneOf(VALID_ARTISTS, error= "The artist_id must be a registered number: eg. '1', '2', '3', '4', '5', '6', '7', etc."))
-    # gallery_id = fields.Integer(required = True, validate=Regexp('0123456789', error= "The gallery_id must be one of our registered galleries: eg. '1', '2', or '3'"))
-    # artist_id = fields.Integer(required = True, validate=Regexp('0123456789', error= "The artist_id must be a registered number: eg. '1', '2', '3', '4', '5', '6' or '7'."))
+    gallery_id = fields.Integer(required = False)
+    artist_id = fields.Integer(required = False)
+    
 class Meta:
     fields = ('id', 'title', 'creator', 'dimensions', 'color_pallet', 'kilograms', 'price', 'medium', 'created', 'descriptions', 'gallery_id', 'artist_id') 
     ordered = True
+
+
+# "OneOf" 
+# example though not used in final production
+
+# maybe not the best thing, as if a new artwork is created it can only be one of these listed registered artists, basically ruling out the use of creating new artists,
+# though as it's showing I can use 'Oneof' I'll leave this here as a demonstration, though in final production would probably advise omitting this use of 'Oneof'. 
+# it just means for the meantime the dev would need to come in here and insert all new registered artists upon reviewing that they are infact an artist they wish to register.
+#VALID_TYPES = ['John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels']
+#validate=OneOf(VALID_TYPES, error= "The creator must be one of our registered artists: 'John Smithers', 'Sandra Bullocks', 'Jimmy Barnes', 'Matthew Finley', 'Chris Hemsrunt', 'Sammy Tammy', 'Jacob Googels'."))
 
     

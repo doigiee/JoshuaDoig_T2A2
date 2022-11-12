@@ -313,6 +313,7 @@ def seed_db():
     db.session.add_all(artworks)
     db.session.commit()
 
+# adding users
     users = [
         User(
             email = "admin@super.com",
