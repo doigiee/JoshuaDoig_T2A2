@@ -1,4 +1,8 @@
-# T2A2
+# T2A2 
+
+[Github repo](https://github.com/doigiee/JoshuaDoig_T2A2)
+
+https://github.com/doigiee/JoshuaDoig_T2A2
 
 NOTE: was going to place all, 'source code for your entire project' in a /src folder, as per requirements, though it seemed to break the app for multiple reasons (possibly due to the .venv or maybe pychache folders being moved). Though these files wont be included in submission I'd rather not risk it and thus have submitted assignment as was developed.
 
