@@ -1,6 +1,6 @@
 # T2A2
 
-NOTE: was going to place all, 'source code for your entire project' in a /src folder, as per requirements, though it seemed to break the app for multiple reasons (possibly due to the .venv or maybe pychache folders being moved). Though these files wont be included in submission I'd rather not risk it and thus have submitted assignment as constructed.
+NOTE: was going to place all, 'source code for your entire project' in a /src folder, as per requirements, though it seemed to break the app for multiple reasons (possibly due to the .venv or maybe pychache folders being moved). Though these files wont be included in submission I'd rather not risk it and thus have submitted assignment as was developed.
 
 1. Once cloning the repo, you will need to create your own virtual environment and own .env (sample provided -: Example of database_url and jwt_secret_key (if lost or confused)
 (DATABASE_URL=postgresql+psycopg2://doigiee:ectjyrj76@127.0.0.1:5432/art_gallery)
@@ -80,7 +80,7 @@ And Authorize JWT function is used to allow only admin to create galleries, dele
 
 ### Results:
 
-### /users         (jwt required)
+### /users         
 [
     {
         "id": 1,
@@ -408,21 +408,17 @@ Main libraries and third party services used:
 ## R8 Describe your projects models in terms of the relationships they have with each other
 The main relationship my models have with each other are the Foreign Key relationships which they share. They reference each other and can prevent database entries, which share foreign key ids, (parent/child relations) from being deleted.
 
-R8 - closely mirror the ERD, in the sql alchemy level, using those terms, needs to describe the relations in terms of SQLAlchemy models. might put a code snippet and explain it.
-You're talking about parent and child, sets/lists/collection types
-https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
-You'd still need to actually state the relationships
-R8 should talk about SQLAlchemy models and Marshmallow schemas
-R8: what your app database ended up with in its code, whatever is in the finished app's models & schemas
+From what i can deduce, my models use declarative mapping which required me to enter all parameters to be passed into it directly. It doesn’t use imperative mapping and the main collection styles I use are lists and sets. As the relationships I have for all tables are a one to many, the foreign key of the child has been referenced in the parent table as a set. I also use a backref instead of back_populates to make a circular relationship (Bidirectional), as it appears to establish the relationship both ways. For instance, through using this method, my child table (artworks) inherited and automatically established the parent attribute (table artists) with one-to-many semantics. It is really quite nice to be able to create a table name a dunder, in another table, and easily create a relationship.
+
+By establishing this relationship it gave me the option to delete cascade table entries, also know as delete-orphan. In some cases I took advantage of this functionality, as in the case of galleries being deleted I set a cascade delete to remove all associated artists, customers and artworks (which represents a art gallery closing its doors and destroying all associated clients and pieces information, only admin can perform this task). In other cases, I set it up so that it simply leaves the ID of a associated entry blank as to not destroy the piece. This was achieved, in some cases, by having a Nullable Many-to-One relationship (Nullable= either True or False). I also did not implement One-to-One, Many-To-Many relationships between my models.
+
+Side note, my values are mapped into variables which represent columns in my tables.
+My marshmallow Schemas are very similar in design to my Table Classes, and mirror them, other than omitting a requirement for ID to be passed, as this is auto generated. They also use marshmallow.validate to required fields which must be entered with sufficient/correct data inputs.
 
 ## R9 Discuss the database relations to be implemented in your application
-My relations between my tables in my database are all mainly one to many (or reversed: many to one), they all share similar columns and Artists have a Parent relationship to Artworks, which is the Child.  
+The relations which need to be implemented in my application are Many-to-One (m-1) in all cases. Or in the singular case of Artworks which has a Many-to-Only-One relationship to Atists, as we are assuming in this assignment that Artworks can only be created by one artist. Also, my tables will mostly share similar columns and have a similar number of rows, depending on number of entries, though I plan for Artworks to have the most db entries. Artists will have a Parent relationship to Artworks, which is the Child. Additionally my tables will contain columns and relate to each other through adopting a parent key (PK) and relating it to a child by inserting its PK into the child as a foreign key (FK) and will thus create Many-to-One relationships when entered into numerous table entries.
 
-
-R9 - Describe the same relations and how they work in the database level, using database terms.
-R9 should talk about the db in db terms - tables, columns, relationships, primary/foreign keys, etc
-R9: what your database is planned to be, based on the ERD
-
+Thus, the relations which my app will need to create will be m-to-1 relationships (or 1-to-many if looking at it from the opposite direction, m-1 / 1-m). This also means that I plan my database to be a relational database.
 
 ## R10 Describe the way tasks are allocated and tracked in your project
 Was considering using trello though as it wasn't required I instead felt more comfortable mainly using pen on paper to document timestamps and milestones. When a task was started, I wrote the task description in my book and once it was completed, I wrote an update with any notes or concerns which I had along with time spent on activities, recreation, personal matters and so on. Similar to a reflective journal.
@@ -436,5 +432,3 @@ If there were problems with a function, or in general, I wrote it down into a li
 ![image](./docs/example_of_notes_4.jpg)
 
 Something else to mention here is that I also did a quick sketch on pen and paper for my ERD which helped me understand how my database would be constructed, sometimes creating diagrams on diagrams.net can become slower than a pen on paper method which is why found this useful. In other words, instead of being slowed down in the moment, (as I am not a pro at diagrams.net), I was instantly able to map out my ERD freely.
-
-

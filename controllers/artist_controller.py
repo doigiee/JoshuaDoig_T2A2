@@ -4,8 +4,10 @@ from models.artist import Artist, ArtistSchema
 from controllers.user_controller import authorize
 from flask_jwt_extended import jwt_required
 
+#artist blueprint
 artists_bp = Blueprint('artists', __name__, url_prefix='/artists')
 
+#get all artists from requesting them from database
 @artists_bp.route('/', methods=["GET"])
 @jwt_required()
 def get_all_artists():
@@ -13,6 +15,7 @@ def get_all_artists():
     artists = db.session.scalars(stmt)
     return ArtistSchema(many=True).dump(artists)
 
+# call and request a single artist from database by calling their id 
 @artists_bp.route('/<int:id>/', methods=["GET"])
 @jwt_required()
 def one_artist(id):
@@ -20,7 +23,7 @@ def one_artist(id):
     artist = db.session.scalar(stmt)
     return ArtistSchema().dump(artist)
      
-
+#create a single artist
 @artists_bp.route('/create', methods=['POST'])
 @jwt_required()
 def create_artist():
@@ -38,6 +41,7 @@ def create_artist():
     # let user know result
     return ArtistSchema().dumps(artist), 201
 
+#update a single artist
 @artists_bp.route('/<int:id>/', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_single_artist(id):
@@ -53,7 +57,7 @@ def update_single_artist(id):
     else:
         return {'error': f'Artist was not found with the matching id of {id}, please try again.'}, 404
 
-#input the id to let the server know which artist to delete
+#input the id to let the server know which artist to delete, admin/dev only
 @artists_bp.route("/delete/<int:id>", methods=["DELETE"])
 @jwt_required()
 def artist_delete(id):

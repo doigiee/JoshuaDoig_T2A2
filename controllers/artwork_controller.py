@@ -5,8 +5,10 @@ from models.art import Art, ArtSchema
 from controllers.user_controller import authorize
 from flask_jwt_extended import jwt_required
 
+#artworks blueprint
 arts_bp = Blueprint('arts', __name__, url_prefix='/arts')
 
+#get all artworks
 @arts_bp.route('/', methods=["GET"])
 @jwt_required()
 def get_all_arts():
@@ -14,6 +16,7 @@ def get_all_arts():
     arts = db.session.scalars(stmt)
     return ArtSchema(many=True).dump(arts)
 
+# get a single artwork by querying its id
 @arts_bp.route('/<int:id>/', methods=["GET"])
 @jwt_required()
 def one_art(id):
@@ -21,6 +24,7 @@ def one_art(id):
     art = db.session.scalar(stmt)
     return ArtSchema().dump(art)
 
+# to create a artwork and insert it into database, specific parameter are required
 @arts_bp.route('/create', methods=['POST'])
 @jwt_required()
 def create_art():
@@ -45,6 +49,7 @@ def create_art():
     # let user know result
     return ArtSchema().dumps(art), 201
 
+# to update and replace entries rows
 @arts_bp.route('/<int:id>/', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_single_artwork(id):
@@ -67,7 +72,7 @@ def update_single_artwork(id):
     else:
         return {'error': f'Artwork was not found with the matching id of {id}, please try again.'}, 404
 
-#input the id to let the server know which art to delete
+#input the id to let the server know which art to delete, admin/dev only
 @arts_bp.route("/delete/<int:id>", methods=["DELETE"])
 @jwt_required()
 def arts_delete(id):

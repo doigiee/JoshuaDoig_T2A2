@@ -9,6 +9,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 #Blueprint
 users_bp = Blueprint('users', __name__, url_prefix='/users')
 
+# to see all users
 @users_bp.route('/', methods=["GET"])
 @jwt_required()
 def get_all_users():
@@ -16,6 +17,7 @@ def get_all_users():
     users = db.session.scalars(stmt)
     return UserSchema(many=True, exclude=['password']).dump(users)
 
+# to register user
 @users_bp.route('/register/', methods=['POST'])
 def user_register():
     try:
@@ -33,7 +35,7 @@ def user_register():
     except IntegrityError:
         return {'error': 'Sorry, please try again, that email is current unavailable or in use'}, 409
 
-
+# to login with user credentials
 @users_bp.route('/login/', methods=['POST'])
 def user_login():
     # user found by email
